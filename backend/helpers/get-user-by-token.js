@@ -10,7 +10,7 @@ const getUserByToken = async (token) => {
 
     const decoded = jwt.verify(token, 'nossosecret')
     
-    const userId = decoded.indexOf
+    const userId = decoded.id
     const user = await User.findById({ _id: userId})
 
     return user
