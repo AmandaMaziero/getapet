@@ -36,7 +36,7 @@ module.exports = class PetController {
             return
         }
 
-        if (images.lenght === 0) {
+        if (images.length === 0) {
             res.status(422).json({ message: 'A imagem é obrigatória!' })
             return
         }
@@ -179,35 +179,33 @@ module.exports = class PetController {
         if (!name) {
             res.status(422).json({ message: 'O nome é obrigatório!' })
             return
+        }else {
+            updatedData.name = name
         }
 
-        updatedData.name = name
 
         if (!age) {
             res.status(422).json({ message: 'A idade é obrigatória!' })
             return
+        }else {
+            updatedData.age = age
         }
-
-        updatedData.age = age
 
         if (!weight) {
             res.status(422).json({ message: 'O peso é obrigatória!' })
             return
+        } else {
+            updatedData.weight = weight
         }
-
-        updatedData.weight = weight
 
         if (!color) {
             res.status(422).json({ message: 'A cor é obrigatória!' })
             return
+        } else {
+            updatedData.color = color
         }
 
-        updatedData.color = color
-
-        if (images.lenght === 0) {
-            res.status(422).json({ message: 'A imagem é obrigatória!' })
-            return
-        } else {
+        if (images.length > 0) {
             updatedData.images = []
             images.map((image) => {
                 updatedData.images.push(image.filename)
@@ -254,7 +252,9 @@ module.exports = class PetController {
 
         await Pet.findByIdAndUpdate(id, pet)
 
-        res.status(200).json({ message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}!` })
+        res.status(200).json({ 
+            message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}!` 
+        })
     }
 
     static async concludeAdoption(req, res) {
